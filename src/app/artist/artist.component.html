@@ -1,0 +1,50 @@
+<div *ngIf="artist" class="container">
+  <h1>{{ artist.name }}</h1>
+
+  <div class="container">
+    <div class="tab-menu group">
+      <ul>
+        <li class=""><a href="#">Bài hát</a></li>
+        <li class=""><a href="#">Album</a></li>
+        <li class=""><a href="#">Tiểu sử</a></li>
+      </ul>
+    </div>
+
+    <hr>
+
+    <div class="tab-content">
+      <h5>SONGS &nbsp;<span class="glyphicon glyphicon-plus" (click)="addSong(selectSongModal)"></span></h5>
+      <div class="list-item">
+        <ul>
+          <li *ngFor="let song of artist.songs">
+            <h6>
+              <a href="#">{{ song }}</a>&nbsp;
+              <span class="glyphicon glyphicon-trash" (click)="deleteSong(song)"></span>
+            </h6>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<!--<ng-template ngbModalContainer></ng-template>-->
+<ng-template #selectSongModal let-c="close" let-d="dismiss">
+  <form (ngSubmit)="onSubmit(addMountForm)" #addMountForm="ngForm">
+    <div class="modal-header">
+      <h5 class="modal-title">Modal title</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')"
+              style="padding: 0 10px 0">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body ">
+      <input class="form-control" type="text" placeholder="enter song..." autofocus [ngModel]="newSong" name="newSong">
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-default">Save</button>
+      <button class="btn " (click)="d('Cross click')">Close</button>
+    </div>
+  </form>
+</ng-template>
